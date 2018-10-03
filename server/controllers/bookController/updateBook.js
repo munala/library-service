@@ -36,7 +36,10 @@ module.exports = async (req, res) => {
 
   Book.findByIdAndUpdate(req.params.bookId, req.body, null, (err, updatedBook) => { // update book
     if (!err) {
-      res.json(updatedBook);
+      res.json({
+        ...updatedBook._doc, // eslint-disable-line no-underscore-dangle
+        ...req.body,
+      });
     } else {
       throw new Error(err);
     }
