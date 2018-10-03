@@ -22,6 +22,7 @@ Run `npm run start:prod` to run app in Production mode.
 
 #### Report
 Report script can be run directly through node using the command `node scripts/generateReport.js` or through npm using the command `npm run report`.
+This can also be run through the shell script `./scripts/generate_report.sh`. Run `chmod 755 scripts/generate_report.sh` if you encounter permission issues using the shell script then run the shell script again.
 
 ### Endpoint documentation
 [Click here][58286272]
