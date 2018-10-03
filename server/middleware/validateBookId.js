@@ -13,6 +13,7 @@ module.exports = async (req, res, next) => {
 
     return;
   }
+
   if (!mongoose.Types.ObjectId.isValid(req.params.bookId)) {
     res.status(400).json({
       message: 'Invalid bookId',

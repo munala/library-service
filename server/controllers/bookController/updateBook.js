@@ -18,7 +18,7 @@ module.exports = async (req, res) => {
 
   if (existingBook && existingBook.id !== req.params.bookId) { // check if existingBook is different
     res.status(409).json({
-      message: 'Book already exists',
+      message: 'A book already exists with the provided fields',
     });
 
     return;

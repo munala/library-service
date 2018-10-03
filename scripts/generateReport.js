@@ -1,14 +1,10 @@
 /* eslint-disable no-console */
 require('console.table');
 const initDb = require('../server/startup/db');
-
 const Book = require('../server/models/Book');
 
 initDb() // initialise database connection
   .then(() => {
-    console.log('\nLIST OF ALL BOOKS');
-    console.log('=================\n');
-
     Book.find({})
       .then((books) => { // find books
         if (books.length === 0) {
@@ -16,6 +12,9 @@ initDb() // initialise database connection
 
           return;
         }
+
+        console.log('\nLIST OF ALL BOOKS');
+        console.log('=================\n');
 
         const tableData = books.map(book => ({ // format for table
           Name: book.name,
