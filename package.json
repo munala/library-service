@@ -3,6 +3,9 @@
   "version": "1.0.0",
   "description": "A service that serves a library’s needs",
   "main": "app.js",
+  "engines": {
+    "node": "8.11.3"
+  },
   "scripts": {
     "test": "npm test",
     "start": "node app.js",
