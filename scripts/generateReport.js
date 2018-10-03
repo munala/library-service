@@ -1,5 +1,6 @@
 /* eslint-disable no-console */
 require('console.table');
+const moment = require('moment');
 const initDb = require('../server/startup/db');
 const Book = require('../server/models/Book');
 
@@ -18,9 +19,9 @@ initDb() // initialise database connection
 
         const tableData = books.map(book => ({ // format for table
           Name: book.name,
-          'Number of Pages': book.numberOfPages,
+          'Borrow Count': book.borrowCount,
           Status: book.getStatus(),
-          'Date Borrowed': book.dateBorrowed || '',
+          'Due Date': book.dateBorrowed ? moment(book.dateBorrowed).add(7, 'days').format('llll') : '',
         }));
 
         console.table(tableData);
