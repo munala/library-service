@@ -4,8 +4,9 @@ const getBook = require('./getBook');
 const updateBook = require('./updateBook');
 const deleteBook = require('./deleteBook');
 const returnBook = require('./returnBook');
-const clearBook = require('./clearBook');
 const getBooks = require('./getBooks');
+const clearBook = require('./clearBook');
+const getBookStatus = require('./getBookStatus');
 
 module.exports = {
   borrowBook,
@@ -15,5 +16,6 @@ module.exports = {
   deleteBook,
   returnBook,
   clearBook,
+  getBookStatus,
   getBooks,
 };

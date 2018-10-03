@@ -35,5 +35,8 @@ module.exports = () => {
   bookRouter.route('/:bookId/clear')
     .put(bookController.clearBook); // clear a book
 
+  bookRouter.route('/:bookId/status')
+    .get(bookController.getBookStatus); // clear a book
+
   return bookRouter;
 };

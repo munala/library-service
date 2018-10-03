@@ -31,5 +31,7 @@ module.exports = async (req, res, next) => {
     return;
   }
 
+  req.book = book;
+
   next();
 };

@@ -14,7 +14,10 @@ const BookSchema = new mongoose.Schema({
   yearOfPublication: Number,
   numberOfPages: Number,
   dateBorrowed: Date,
-  borrowCount: Number,
+  borrowCount: {
+    type: Number,
+    default: 0,
+  },
 });
 
 /**
@@ -23,7 +26,7 @@ const BookSchema = new mongoose.Schema({
  */
 BookSchema.methods.borrow = async function borrow() {
   if (this.dateBorrowed) {
-    return ({ error: 'Book had already been borrowed' });
+    return ('Book has already been borrowed');
   }
 
   this.dateBorrowed = moment();
@@ -40,13 +43,13 @@ BookSchema.methods.borrow = async function borrow() {
  */
 BookSchema.methods.return = async function returnBook() {
   if (!this.dateBorrowed) {
-    return ({ error: 'Book has not been borrowed' });
+    return ('Book had not been borrowed');
   }
 
   const duration = calculateDuration(this.dateBorrowed);
 
   if (duration > 7) {
-    return ({ error: 'Book return date has already passed' });
+    return ('Book return date is overdue');
   }
 
   this.dateBorrowed = null;
@@ -62,7 +65,7 @@ BookSchema.methods.return = async function returnBook() {
  */
 BookSchema.methods.clearOverdue = async function clearOverdue() {
   if (!this.dateBorrowed) {
-    return ({ error: 'Book does not have an overdue return date' });
+    return ('Book does not have an overdue return date');
   }
 
   this.dateBorrowed = null;
@@ -99,8 +102,8 @@ BookSchema.statics.validate = function validateSchema(book) {
   const schema = {
     name: Joi.string().required(),
     author: Joi.string().required(),
-    yearOfPublication: Joi.integer().min(1000).max(moment().year()).required(),
-    numberOfPages: Joi.integer().min(1).required(),
+    yearOfPublication: Joi.number().min(1000).max(moment().year()).required(),
+    numberOfPages: Joi.number().min(1).required(),
   };
 
   return Joi.validate(book, schema);
