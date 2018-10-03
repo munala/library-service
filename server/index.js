@@ -12,5 +12,6 @@ module.exports = (app) => {
 
   app.use('/api/books', bookRouter); // setup book routes
   app.use(errors());
+
   initDb(); // setup database
 };
