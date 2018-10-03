@@ -1,0 +1,47 @@
+{
+  "name": "library-service",
+  "version": "1.0.0",
+  "description": "A service that serves a library’s needs",
+  "main": "app.js",
+  "engines": {
+    "node": "8.11.3"
+  },
+  "scripts": {
+    "test": "npm test",
+    "start": "node app.js",
+    "start:dev": "NODE_ENV=development nodemon app.js",
+    "start:prod": "NODE_ENV=production node app.js",
+    "report": "node scripts/generateReport.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/munala/library-service.git"
+  },
+  "keywords": [
+    "library",
+    "service"
+  ],
+  "author": "Oliver Munala",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/munala/library-service/issues"
+  },
+  "homepage": "https://github.com/munala/library-service#readme",
+  "dependencies": {
+    "body-parser": "^1.18.3",
+    "celebrate": "^8.0.2",
+    "config": "^2.0.1",
+    "console.table": "^0.10.0",
+    "cors": "^2.8.4",
+    "express": "^4.16.3",
+    "joi": "^13.7.0",
+    "jsonwebtoken": "^8.3.0",
+    "moment": "^2.22.2",
+    "mongoose": "^5.3.1"
+  },
+  "devDependencies": {
+    "eslint": "^5.6.1",
+    "eslint-config-airbnb-base": "^13.1.0",
+    "eslint-plugin-import": "^2.14.0"
+  }
+}
