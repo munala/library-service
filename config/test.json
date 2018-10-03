@@ -1,0 +1,5 @@
+{
+  "db":{
+    "mongodbUrl": "LIBRARY_SERVICE_TEST_MONGODB_URL"
+  }
+}

@@ -1,0 +1,5 @@
+{
+  "db":{
+    "mongodbUrl": "LIBRARY_SERVICE_DEV_MONGODB_URL"
+  }
+}
