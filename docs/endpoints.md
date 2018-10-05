@@ -140,11 +140,7 @@
     }
 
 ### Get status of book
-**Endpoint**:  `PUT: /api/books/:bookId`
-
-**Body**:
-
-    type: String! ("getStatus")
+**Endpoint**:  `GET: /api/books/:bookId/status`
 
 **Response**:
 
