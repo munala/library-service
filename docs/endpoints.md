@@ -1,4 +1,9 @@
 # Endpoints
+
+`Type` = `optional value of type Type`
+
+`Type!` = `required value of type Type`
+
 ### Create book
 **Endpoint**:  `POST: /api/books`
 
@@ -64,10 +69,14 @@
 
 **Body**:
 
-    name: String!
-    author: String!
-    numberOfPages: Number!
-    yearOfPublication: Number!
+    type: String! ("update")
+
+    book: Object! ({
+       name: String!
+       author: String!
+       numberOfPages: Number!
+       yearOfPublication: Number!
+    })
 
 **Response**:
 
@@ -91,7 +100,11 @@
     }
 
 ### Borrow book
-**Endpoint**:  `PUT: /api/books/:bookId/borrow`
+**Endpoint**:  `PUT: /api/books/:bookId`
+
+**Body**:
+
+    type: String! ("borrow")
 
 **Response**:
 
@@ -101,7 +114,11 @@
 
 
 ### Return book
-**Endpoint**:  `PUT: /api/books/:bookId/return`
+**Endpoint**:  `PUT: /api/books/:bookId`
+
+**Body**:
+
+    type: String! ("return")
 
 **Response**:
 
@@ -110,10 +127,27 @@
     }
 
 ### Clear book
-**Endpoint**:  `PUT: /api/books/:bookId/clear`
+**Endpoint**:  `PUT: /api/books/:bookId`
+
+**Body**:
+
+    type: String! ("clear")
 
 **Response**:
 
     {
       "message": "Book cleared"
+    }
+
+### Get status of book
+**Endpoint**:  `PUT: /api/books/:bookId`
+
+**Body**:
+
+    type: String! ("getStatus")
+
+**Response**:
+
+    {
+      "message": "available"
     }

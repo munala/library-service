@@ -1,12 +1,32 @@
 const Book = require('../../models/Book');
-
+const borrow = require('./borrowBook');
+const returnBook = require('./returnBook');
+const clear = require('./clearBook');
+const getStatus = require('./getBookStatus');
 /**
  * [exports update book controller]
  * @param  {Object}  req [response]
  * @param  {Object}  res [request]
  */
 module.exports = async (req, res) => {
-  const { error } = Book.validate(req.body);
+  const bookActionTypes = {
+    borrow,
+    clear,
+    getStatus,
+    return: returnBook,
+  };
+
+  const bookAction = bookActionTypes[req.body.type];
+
+  // borrow, clear, getStatus or return
+  if (bookAction) {
+    await bookAction(req, res);
+
+    return;
+  }
+
+  // continue to update
+  const { error } = Book.validate(req.body.book);
 
   if (error) {
     res.send(400).json({ message: error.details[0].message });
@@ -16,7 +36,8 @@ module.exports = async (req, res) => {
 
   const existingBook = await Book.findOne(req.body);
 
-  if (existingBook && existingBook.id !== req.params.bookId) { // check if existingBook is different
+  // check if existingBook is different
+  if (existingBook && existingBook.id !== req.params.bookId) {
     res.status(409).json({
       message: 'A book already exists with the provided fields',
     });
@@ -26,7 +47,8 @@ module.exports = async (req, res) => {
 
   const { name, author } = req.book;
 
-  if (author !== req.body.author || name !== req.body.name) { // protect author and name
+  // protect author and name
+  if (author !== req.body.book.author || name !== req.body.book.name) {
     res.status(409).json({
       message: 'name and author field cannot be changed',
     });
@@ -34,11 +56,12 @@ module.exports = async (req, res) => {
     return;
   }
 
-  Book.findByIdAndUpdate(req.params.bookId, req.body, null, (err, updatedBook) => { // update book
+  // update book
+  Book.findByIdAndUpdate(req.params.bookId, req.body.book, null, (err, updatedBook) => {
     if (!err) {
       res.json({
         ...updatedBook._doc, // eslint-disable-line no-underscore-dangle
-        ...req.body,
+        ...req.body.book,
       });
     } else {
       throw new Error(err);
