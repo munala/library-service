@@ -17,6 +17,12 @@ module.exports = () => {
 
   bookRouter.use('/:bookId', validateBookId);
 
+  bookRouter.route('/:bookId')
+    .get(bookController.getBook); // get a specific book
+
+  bookRouter.route('/:bookId')
+    .put(validateBookFields, bookController.updateBook); // update a book
+
   // get a specific book
   bookRouter.route('/:bookId')
     .get(bookController.getBook);
@@ -28,6 +34,10 @@ module.exports = () => {
   // delete a book
   bookRouter.route('/:bookId')
     .delete(bookController.deleteBook);
+
+  // get a book's status
+  bookRouter.route('/:bookId/status')
+    .get(bookController.getBookStatus);
 
   return bookRouter;
 };

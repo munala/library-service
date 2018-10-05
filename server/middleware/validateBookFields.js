@@ -24,7 +24,7 @@ module.exports = celebrate({
       book: bookValidation.required(),
     }),
     otherwise: Joi.object({
-      type: Joi.string().valid('update', 'borrow', 'return', 'clear', 'getStatus').required(),
+      type: Joi.string().valid('update', 'borrow', 'return', 'clear').required(),
     }),
   }),
 });

@@ -2,7 +2,7 @@ const Book = require('../../models/Book');
 const borrow = require('./borrowBook');
 const returnBook = require('./returnBook');
 const clear = require('./clearBook');
-const getStatus = require('./getBookStatus');
+
 /**
  * [exports update book controller]
  * @param  {Object}  req [response]
@@ -12,7 +12,6 @@ module.exports = async (req, res) => {
   const bookActionTypes = {
     borrow,
     clear,
-    getStatus,
     return: returnBook,
   };
 
