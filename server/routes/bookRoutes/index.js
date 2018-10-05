@@ -17,26 +17,17 @@ module.exports = () => {
 
   bookRouter.use('/:bookId', validateBookId);
 
+  // get a specific book
   bookRouter.route('/:bookId')
-    .get(bookController.getBook); // get a specific book
+    .get(bookController.getBook);
 
+  // update, borrow, return, clear or get status of a book
   bookRouter.route('/:bookId')
-    .put(validateBookFields, bookController.updateBook); // update a book
+    .put(validateBookFields, bookController.updateBook);
 
+  // delete a book
   bookRouter.route('/:bookId')
-    .delete(bookController.deleteBook); // delete a book
-
-  bookRouter.route('/:bookId/borrow')
-    .put(bookController.borrowBook); // borrow a book
-
-  bookRouter.route('/:bookId/return')
-    .put(bookController.returnBook); // return a book
-
-  bookRouter.route('/:bookId/clear')
-    .put(bookController.clearBook); // clear a book
-
-  bookRouter.route('/:bookId/status')
-    .get(bookController.getBookStatus); // clear a book
+    .delete(bookController.deleteBook);
 
   return bookRouter;
 };
